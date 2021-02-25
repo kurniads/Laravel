@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Biodata;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,31 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+//get all
+Route::get('biodata', function () {
+    return Biodata::all();
+});
+
+//get id
+Route::get('biodata/{id}', function ($id) {
+    return Biodata::find($id);
+});
+
+Route::post('biodata', function () {
+    Biodata::create(request()->all());
+    return [
+        'message' => 'berhasil menambahkan',
+    ];
+});
+
+Route::delete('biodata/{id}', function ($id) {
+    Biodata::destroy($id);
+    return [
+        'message' => 'berhasil menghapus data',
+    ];
+});
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
