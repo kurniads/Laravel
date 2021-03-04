@@ -25,6 +25,7 @@ Route::get('biodata/{id}', function ($id) {
     return Biodata::find($id);
 });
 
+//create
 Route::post('biodata', function () {
     Biodata::create(request()->all());
     return [
@@ -32,6 +33,7 @@ Route::post('biodata', function () {
     ];
 });
 
+//delete id
 Route::delete('biodata/{id}', function ($id) {
     Biodata::destroy($id);
     return [
