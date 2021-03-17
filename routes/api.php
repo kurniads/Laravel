@@ -15,32 +15,53 @@ use App\Models\Biodata;
 |
 */
 
+
+
+
+
+
+
 //get all
+//Route::get('/biodata', 'BiodataController@getAllAPISoftDelete');
+Route::get('/biodata', 'BiodataController@getAllAPI');
+/*
 Route::get('biodata', function () {
     return Biodata::all();
 });
+*/
 
 //get id
+Route::get('/biodata/{biodata}', 'BiodataController@getOneAPI');
+/*
 Route::get('biodata/{id}', function ($id) {
     return Biodata::find($id);
 });
+*/
 
 //create
+Route::post('/biodata', 'BiodataController@createOneAPI');
+/*
 Route::post('biodata', function () {
     Biodata::create(request()->all());
     return [
         'message' => 'berhasil menambahkan',
     ];
 });
+*/
+
+//update
+Route::patch('biodata/{biodata}', 'BiodataController@updateOneAPI');
 
 //delete id
+Route::delete('/biodata/{biodata}', 'BiodataController@deleteOneAPI');
+/*
 Route::delete('biodata/{id}', function ($id) {
     Biodata::destroy($id);
     return [
         'message' => 'berhasil menghapus data',
     ];
 });
-
+*/
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

@@ -16,4 +16,5 @@ Route::post('/biodata', 'BiodataController@store');
 Route::delete('/biodata/{biodata}', 'BiodataController@destroy');
 
 Route::patch('/biodata/{biodata}', 'BiodataController@update');
-Route::resource('biodata', 'BiodataController');
+
+//Route::resource('biodata', 'BiodataController');

@@ -43,7 +43,7 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-primary">Tambah Data</button>
+                <button type="submit" class="btn btn-primary">Ubah Data</button>
               </form>
         </div>
     </div>

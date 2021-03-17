@@ -159,4 +159,99 @@ class BiodataController extends Controller
 
         return redirect('/biodata')->with('status','Biodata Berhasil Dihapus');
     }
+
+    //API
+
+    public function getAllAPI()
+    {
+        $data = Biodata::all();
+        $result = [
+            'data' => $data,
+            'message' => 'sukses',
+        ];
+        return $result;
+
+    }
+
+    public function getAllAPISoftDelete()
+    {
+       // $allData = Biodata::all();
+        //dengan soft delete
+        $data = Biodata::withTrashed()->get();
+        $result = [
+            'data' => $data,
+            'message' => 'sukses',
+        ];
+        return $result;
+
+    }
+
+    public function getOneAPI($biodata)
+    {
+        $data = Biodata::withTrashed()->find($biodata);
+        if($data->deleted_at!=NULL){
+            $result = [
+                'message' => 'data tidak ditemukan',
+            ];
+        }
+
+        $result = [
+            'data' => $data,
+            'message' => 'sukses',
+        ];
+       return $result;
+
+    }
+
+    public function deleteOneAPI($biodata)
+    {
+        Biodata::destroy($biodata);
+        $result = [
+            'message' => 'data berhasil dihapus',
+        ];
+        return $result;
+    }
+
+    public function createOneAPI(Request $request)
+    {
+        $data = $request->all();
+        $data2 = $data['biodata'];
+        $data2 = $data2[0];
+        $data2 = Biodata::create([
+            'nama_bio' => $data2["nama"],
+            'umur_bio' => $data2["umur"],
+            'alamat_bio' => $data2["alamat"],
+        ]);
+        $data2->save();
+        
+        $result = [
+            'data' => $data,
+            'message' => 'sukses',
+        ];
+
+        //Biodata::create($request()->all());
+
+        return $result;
+    }
+
+    public function updateOneAPI(Biodata $biodata, Request $request)
+    {
+        $data = $request->all();
+        $data2 = $data['biodata'];
+        $data2 = $data2[0];
+
+        Biodata::where('id', $biodata->id)
+                ->update([
+                    'nama_bio'=>$data2['nama'],
+                    'umur_bio'=>$data2['umur'],
+                    'alamat_bio'=>$data2['alamat'],
+                ]);
+        
+        $result = [
+            'data' => $data,
+            'message' => 'sukses',
+        ];
+        
+        return $result;
+    }
 }
